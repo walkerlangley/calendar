@@ -1,3 +1,5 @@
+'use strict';
+
 const ERRORMSG = 'Please use a valid Date object'
 const dayOfWeekMap = {
   'sunday': 0,
@@ -9,11 +11,15 @@ const dayOfWeekMap = {
   'saturday': 6,
 }
 
-const dateType = date => date instanceof Date
+const dateType = date => {
+  if (date instanceof Date) return true;
+  throw new Error(ERRORMSG)
+}
+
 
 const getCurrentDate = () => new Date(Date.now());
 
-const getDayOfMonth = date => dateType(date) ? date.getDate() : ERRORMSG
+const getDayOfMonth = date => dateType(date) ? date.getDate() : ERRORMSG;
 
 const getFirstDayOfMonth = date => {
   return dateType(date)
@@ -57,4 +63,5 @@ const generateCalendar = date => {
   return calendar
 }
 
+// getDayOfMonth('2018-05-05');
 generateCalendar(getCurrentDate());
